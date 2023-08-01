@@ -1,9 +1,9 @@
 // ==UserScript==
-// @name         Overleaf - Additional Keymaps
-// @namespace    https://github.com/BLumbye/overleaf-userscripts
+// @name         (mine) Overleaf - Additional Keymaps
+// @namespace    https://github.com/KatyBlumer/overleaf-userscripts-forked
 // @version      0.2
 // @description  Adds new keybindings to Overleaf
-// @author       Benjamin Lumbye
+// @author       Benjamin Lumbye, Katy Blumer
 // @license      GPL-3
 // @match        https://www.overleaf.com/project/*
 // @grant        none
@@ -15,17 +15,24 @@
   window.addEventListener('UNSTABLE_editor:extensions', (event) => {
     const { CodeMirror, CodeMirrorVim, extensions } = event.detail;
 
-    // Add CodeMirror keymaps
+    // Add CodeMirror keymaps: NOTE: Alt = Opt on mac
     extensions.push(
       CodeMirror.keymap.of([
-        {
-          key: 'Ctrl-m',
+        { // Verbatim / typewriter font
+          key: 'Alt-v',
           run(view) {
             wrapSelection(CodeMirror, view, '\\texttt{', '}');
             return true;
           },
         },
-        {
+        {  // Math (inline)
+          key: 'Alt-m',
+          run(view) {
+            wrapSelection(CodeMirror, view, '$', '$');
+            return true;
+          },
+        },
+        {  // Escape all special characters
           key: 'Alt-e',
           run(view) {
             escapeSelection(CodeMirror, view);
