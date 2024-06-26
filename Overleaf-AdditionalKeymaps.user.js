@@ -6,10 +6,25 @@
 // @author       Benjamin Lumbye, Katy Blumer
 // @license      GPL-3
 // @match        https://www.overleaf.com/project/*
-// @grant        none
+// @grant        GM_addStyle
 // ==/UserScript==
 
 'use strict';
+
+
+//  // Make ctrl+f highlights show up better
+// Make all found ones yellow
+GM_addStyle(`
+.cm-searchMatch.cm-searchMatch {
+    background-color: #cbd50ce6 !important;
+}`);
+// Make currently highlighted one green
+GM_addStyle(`
+.cm-searchMatch.cm-searchMatch.cm-searchMatch-selected {
+    background-color: #3cd313ed !important;
+}`);
+
+
 
 (function () {
   window.addEventListener('UNSTABLE_editor:extensions', (event) => {
